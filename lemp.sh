@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #PARAMETERS
 DOMAIN="alisonbutcher.com"
