@@ -40,11 +40,10 @@ DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 apt install nginx mysql-server-5.7 php-fpm php-mysql -y
 
 #new server block nginx
-cp website-ssl.com.conf /etc/nginx/sites-available/$DOMAIN-ssl.conf 
+# cp website-ssl.com.conf /etc/nginx/sites-available/$DOMAIN-ssl 
 cp website.com.conf /etc/nginx/sites-available/$DOMAIN.conf
-# curl --http1.1 http://example.com/somefile --output etc/nginx/sites-available/$DOMAIN
-ln -s /etc/nginx/sites-available/$DOMAIN.conf /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/$DOMAIN-ssl.conf /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
+# ln -s /etc/nginx/sites-available/$DOMAIN-ssl /etc/nginx/sites-enabled/
 
 #add lets-encrypt
 apt add-apt-repository ppa:certbot/certbot -y
