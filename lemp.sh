@@ -67,7 +67,6 @@ rm /etc/nginx/sites-available/default
 cp index.php /var/www/html
 echo "Once you have done the above you should run mysql.sh to complete the installation"
 
-
 echo "Created new user " + $USER + " with password " + $PWD + ". Please write it down now."
 
 
