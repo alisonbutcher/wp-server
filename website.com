@@ -7,7 +7,7 @@ server {
         listen [::]:80;
         root /var/www/html;
         index index.php index.html index.htm index.nginx-debian.html;
-        server_name alisonbutcher.com www.alisonbutcher.com;
+        server_name dev.alisonbutcher.com;
 
         location / {
                 try_files $uri $uri/ =404;
