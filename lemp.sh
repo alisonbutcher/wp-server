@@ -34,7 +34,7 @@ ufw enable
 
 #update packages
 apt update
-apt upgrade -y
+DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 
 #install servers
 apt install nginx mysql-server-5.7 php-fpm php-mysql -y
