@@ -46,9 +46,12 @@ cp website.com /etc/nginx/sites-available/$DOMAIN
 ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
 # ln -s /etc/nginx/sites-available/$DOMAIN-ssl /etc/nginx/sites-enabled/
 
+# Secure MYSQL
+mysql_secure_installation
+
 #add lets-encrypt
 apt add-apt-repository ppa:certbot/certbot -y
-apt install python-certbot-nginx
+apt install python-certbot-nginx -y 
 sudo apt update
 
 #get ssl
