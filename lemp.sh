@@ -14,14 +14,12 @@ if [[ $EUID -ne 0 ]] ; then
   exit 1
 fi
 
-
-
 # Add non root user
 echo "Adding general user"
-sudo adduser $USER --gecos "Alison Butcher,none,none,none" --disabled-password
+adduser $USER --gecos "none,none,none,none" --disabled-password
 
-#Generate Password for user
-$PWD=openssl rand -base64 8
+#Generate / Assign Password for user
+PWD=$(openssl rand -base64 8)
 echo $USER:$PWD | chpasswd 
 
 #Set groups
@@ -46,30 +44,30 @@ apt install nginx mysql-server-5.7 php-fpm php-mysql -y
 apt install software-properties-common -y 
 
 #new server block nginx
-# cp website-ssl.com.conf /etc/nginx/sites-available/$DOMAIN-ssl 
 cp website.com /etc/nginx/sites-available/$DOMAIN
 ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
-# ln -s /etc/nginx/sites-available/$DOMAIN-ssl /etc/nginx/sites-enabled/
 
 # Secure MYSQL
 mysql_secure_installation
 
 #add lets-encrypt
-apt add-apt-repository ppa:certbot/certbot -y
+add-apt-repository ppa:certbot/certbot -y
 apt install python-certbot-nginx -y 
-sudo apt update
+apt update
 
 #get ssl
-certbot --nginx --email $SSL_EMAIL --agree-tos -d $DOMAIN
-# use below instead of above if you have www version of domain as well
-# certbot --nginx --email $SSL_EMAIL --agree-tos -d $DOMAIN -d www.$DOMAIN
+certbot --agree-tos --nginx --email $SSL_EMAIL -d $DOMAIN
 
+# remove default nginx site
 rm /etc/nginx/sites-available/default
 
+# copy php test file to webroot
 cp index.php /var/www/html
+
+
 echo "Once you have done the above you should run mysql.sh to complete the installation"
 
-echo "Created new user " + $USER + " with password " + $PWD + ". Please write it down now."
+echo "Created new user $USER with password $PWD. Please write it down now."
 
 
 
