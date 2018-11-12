@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="0.1.0"
+version="1.1.0"
 
 #PARAMETERS
 DOMAIN="dev.alisonbutcher.com"
@@ -29,12 +29,13 @@ rsync --archive --chown=$USER:$USER ~/.ssh /home/$USER
 
 #configure firewall
 ufw allow OpenSSH
-ufw allow 'Nginx Full'
+ufw allow 80
+ufw allow 443
 ufw enable
 
 #update packages
 apt update
-DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+DEBIAN_FRONTEND=noninteractive apt -y upgrade
 
 #install servers
 apt install nginx mysql-server-5.7 php-fpm php-mysql -y
@@ -50,10 +51,14 @@ apt add-apt-repository ppa:certbot/certbot -y
 apt install python-certbot-nginx
 sudo apt update
 
-#secure mysql
-mysql_secure_installation
-
 #get ssl
-certbot --nginx --email $SSL_EMAIL --agree-tos -d $DOMAIN -d www.$DOMAIN
+certbot --nginx --email $SSL_EMAIL --agree-tos -d $DOMAIN
+# use below instead of above if you have www version of domain as well
+# certbot --nginx --email $SSL_EMAIL --agree-tos -d $DOMAIN -d www.$DOMAIN
+
+
+echo "Once you have done the above you should run mysql.sh to complete the installation"
+
+
 
 

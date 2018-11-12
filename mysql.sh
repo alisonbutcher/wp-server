@@ -1,0 +1,2 @@
+#secure mysql
+mysql_secure_installation
