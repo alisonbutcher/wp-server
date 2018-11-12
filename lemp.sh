@@ -14,12 +14,14 @@ if [[ $EUID -ne 0 ]] ; then
   exit 1
 fi
 
-#Generate Password for user
-$PWD=openssl rand -base64 32
+
 
 # Add non root user
 echo "Adding general user"
 sudo adduser $USER --gecos "Alison Butcher,none,none,none" --disabled-password
+
+#Generate Password for user
+$PWD=openssl rand -base64 8
 echo $USER:$PWD | chpasswd 
 
 #Set groups
