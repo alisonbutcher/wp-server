@@ -41,7 +41,7 @@ apt install nginx mysql-server-5.7 php-fpm php-mysql -y
 
 #new server block nginx
 # cp website-ssl.com.conf /etc/nginx/sites-available/$DOMAIN-ssl 
-cp website.com.conf /etc/nginx/sites-available/$DOMAIN.conf
+cp website.com /etc/nginx/sites-available/$DOMAIN
 ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
 # ln -s /etc/nginx/sites-available/$DOMAIN-ssl /etc/nginx/sites-enabled/
 
