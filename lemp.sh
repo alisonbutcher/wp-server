@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 version="0.1.0"
 
 #PARAMETERS
-DOMAIN="alisonbutcher.com"
+DOMAIN="dev.alisonbutcher.com"
 USER="alison"
 SSL_EMAIL="alisonkbutcher@gmail.com"
 
@@ -52,7 +52,6 @@ sudo apt update
 mysql_secure_installation
 
 #get ssl
-certbot --nginx --email --agree-tos $SSL_EMAIL -d $DOMAIN -d www.$DOMAIN
-
+certbot --nginx --email $SSL_EMAIL --agree-tos -d $DOMAIN -d www.$DOMAIN
 
 
