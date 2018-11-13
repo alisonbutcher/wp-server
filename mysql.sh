@@ -1,5 +1,7 @@
 #!/bin/bash
 
+service mysql start
+
 #Generate / Assign Password for user
 SQLPWD=$(openssl rand -base64 6)
 # Make sure that NOBODY can access the server without a password
