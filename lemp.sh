@@ -47,14 +47,6 @@ apt install software-properties-common -y
 cp website.com /etc/nginx/sites-available/$DOMAIN
 ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
 
-# Secure MYSQL
-UPDATE mysql.user SET Password=PASSWORD('root') WHERE User='root';
-DELETE FROM mysql.user WHERE User='';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-DROP DATABASE IF EXISTS test;
-DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
-FLUSH PRIVILEGES;
-
 #add lets-encrypt
 add-apt-repository ppa:certbot/certbot -y
 apt install python-certbot-nginx -y 
@@ -69,8 +61,8 @@ rm /etc/nginx/sites-available/default
 # copy php test file to webroot
 cp index.php /var/www/html
 
+mysql_secure_installation
 
-echo "Once you have done the above you should run mysql.sh to complete the installation"
 
 echo "Created new user $USER with password $PWD. Please write it down now."
 
